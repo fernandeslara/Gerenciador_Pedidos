@@ -1,26 +1,25 @@
 import java.io.Serializable;
 
-public class Cliente implements Serializable{
+public class Cliente implements Serializable {
     private String nome;
-    private int tel;
-    private String end;
+    private String telefone;
+    private String endereco;
 
-    public Cliente(String nome, int tel, String end){
+    public Cliente(String nome, String telefone, String endereco) {
         this.nome = nome;
-        this.tel = tel;
-        this.end = end;
+        this.telefone = telefone;
+        this.endereco = endereco;
     }
 
     public String getNome(){
         return nome;
     }
 
-    public int getTel(){
-        return tel;
+    public String getTelefone(){
+        return telefone;
     }
     
-    public String getEnd(){
-        return nome;
+    public String getEndereco(){
+        return endereco;
     }
-    
 }
