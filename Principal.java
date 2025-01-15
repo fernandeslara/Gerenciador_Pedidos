@@ -2,6 +2,7 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class GerenciadorArquivos {
 
@@ -71,6 +72,8 @@ public class GerenciadorArquivos {
     }
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
         // Criando alguns clientes e pedidos para teste
         Cliente cliente1 = new Cliente("Fulano", "9999", "Rua A");
         Cliente cliente2 = new Cliente("Ciclano", "8888", "Rua B");
@@ -87,15 +90,54 @@ public class GerenciadorArquivos {
         pedidos.add(pedido1);
         pedidos.add(pedido2);
 
-        // Salvando as listas em arquivos
-        salvarClientes("clientes.dat", clientes);
-        salvarPedidos("pedidos.dat", pedidos);
-
-        // Exportando para CSV
-        exportarClientesParaCSV("clientes.csv", clientes);
-        exportarPedidosParaCSV("pedidos.csv", pedidos);
-
         System.out.println(pedido1);
         System.out.println(pedido2);
+
+        while (true) {
+            System.out.println("\nMENU:");
+            System.out.println("1 - Salvar clientes em arquivo binario");
+            System.out.println("2 - Carregar clientes de arquivo binario");
+            System.out.println("3 - Salvar pedidos em arquivo binario");
+            System.out.println("4 - Carregar pedidos de arquivo binario");
+            System.out.println("5 - Exportar clientes para CSV");
+            System.out.println("6 - Exportar pedidos para CSV");
+            System.out.println("7 - Sair");
+            System.out.print("Escolha uma opção: ");
+            int opcao = scanner.nextInt();
+            scanner.nextLine();  // Consumir a nova linha
+
+            switch (opcao) {
+                case 1:
+                    salvarClientes("clientes.dat", clientes);
+                    System.out.println("Clientes salvos com sucesso.");
+                    break;
+                case 2:
+                    clientes = carregarClientes("clientes.dat");
+                    System.out.println("Clientes carregados com sucesso.");
+                    break;
+                case 3:
+                    salvarPedidos("pedidos.dat", pedidos);
+                    System.out.println("Pedidos salvos com sucesso.");
+                    break;
+                case 4:
+                    pedidos = carregarPedidos("pedidos.dat");
+                    System.out.println("Pedidos carregados com sucesso.");
+                    break;
+                case 5:
+                    exportarClientesParaCSV("clientes.csv", clientes);
+                    System.out.println("Clientes exportados para CSV com sucesso.");
+                    break;
+                case 6:
+                    exportarPedidosParaCSV("pedidos.csv", pedidos);
+                    System.out.println("Pedidos exportados para CSV com sucesso.");
+                    break;
+                case 7:
+                    System.out.println("Saindo...");
+                    scanner.close();
+                    return;  // Sai do programa
+                default:
+                    System.out.println("Opção inválida.");
+            }
+        }
     }
 }
